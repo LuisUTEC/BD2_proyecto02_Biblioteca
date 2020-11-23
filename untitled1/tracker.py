@@ -17,7 +17,7 @@ class TweetListener(tweepy.StreamListener):
 
     def on_data(self, data):
         print(datetime.now().strftime("%Y-%m-%d %H:%M:%S") + " :: tweet read" )
-        ptrFile = self.__open_file()        
+        ptrFile = self.__open_file()
         ptrFile.write(data + "\n")
         ptrFile.close()
         return True
