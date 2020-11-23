@@ -5,7 +5,7 @@ from os.path import isfile, join
 import params
 
 def encodeText(tweet_text):    
-    tweet_text = tweet_text.replace('\n',' ')  
+    tweet_text = tweet_text.replace('\n', ' ')
     #tweet_text = tweet_text.encode("utf-8") 
     return str(tweet_text)
 
@@ -61,10 +61,3 @@ if __name__ == '__main__':
         file_out = join(path_out, f)   
         if isfile(file_in):
             parse_file(file_in, file_out)
-
-
-    
-
-        
-                
-        
