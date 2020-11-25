@@ -5,6 +5,9 @@ Integrantes:
 - Cordero Pinela, Luis
 - Mejia Ramon, Marlon
 
-## Introducciòn
+## Introducción
+
+
+
 ## Frontend
 ## Backend
