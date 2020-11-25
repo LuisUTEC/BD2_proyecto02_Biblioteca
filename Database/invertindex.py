@@ -5,10 +5,13 @@ from nltk import collections
 from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 
-class startcount:
-	def __init__(self):
-		self.df=set()
-		self.tfd={}
+def tf(num):
+    return round(math.log10(1+num),2)
+
+def idf(num,N):
+    return round(math.log10(N/num),2)
+
+
 def tf_idf(term,tokens,Ids):
 	st=SnowballStemmer('spanish')
 	for token in tokens:
@@ -28,22 +31,19 @@ def tf_idf(term,tokens,Ids):
 				tmp.tfd[doc_id] = 1
 
 			terms[token] = term[token]
-def tf_idf(N, df, tfd):
-  a = math.log((1+tfd), 10)
-  b = math.log((N/df), 10)
-  return round((a * b), 6)
-def invert_index(self,query):
+
+def invert_index_rc(self,query):
 	KScores=dict()
-	tokens=Tokensclean()
+	tokens=Tokensclean()	
 	terms=tokens.edit_query(query)
 	weights=dict(collections.Counter(terms).items())
 	for query in weights:
 		Ids=self.L(query)
 		for doc in Ids:
-			if doc[0] not in KScores:
-				KScores[doc[0]]=tf_idf(terms,tokens,Ids)*tf_idf(terms,tokens,Ids)
-			else:
-				KScores[doc[0]]=KScores[doc[0]]+tf_idf(terms,tokens,Ids)*tf_idf(terms,tokens,Ids)
+			if doc[0] not in scores:
+                    scores[doc[0]] = tf(doc[1])*tf(weights[terms])
+                else:
+                    scores[doc[0]] = scores[doc[0]] + tf(doc[1])*tf(weights[terms])
 				
 	KScores=sorted(KScores.items(),key=lambda kv: kv[1], reverse=True)
 	return KScores
