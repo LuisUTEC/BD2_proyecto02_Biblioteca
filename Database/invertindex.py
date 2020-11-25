@@ -13,7 +13,7 @@ def tf_idf(term,tokens,Ids):
 	st=SnowballStemmer('spanish')
 	for token in tokens:
 		token=st.stem(token)
-		if token not in terms:
+		if token not in term:
 			term[token]=startcount()
 			term[token].df.add(Ids)
 			if id in term[token].tfd:
