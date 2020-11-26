@@ -7,7 +7,7 @@ Integrantes:
 
 ## Introducción
 
-El objetivo de este proyecto es poner en practica los conceptos de recuperacion de textos, indices y scoring, aplicándolos sobre grandes cantidades de data real. Para ello empleamos la API de Twitter.
+El objetivo de este proyecto es poner en practica los conceptos de recuperacion de textos, indices y scoring, aplicándolos sobre grandes cantidades de data real. Para ello utilizaremos Twitter, una red social muy importante en la actualidad por su manejo de informaciòn sobre determinados grupos de usuarios a nivel mundial.
 
 ## Frontend
 
