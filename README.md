@@ -55,6 +55,8 @@ def setFiles(files):
 </pre>
 
 
+[Codigo](https://github.com/LuisUTEC/BD2_proyecto02_Biblioteca/blob/master/Files.py)
+
 ### Construcción del Índice
 La construcciòn del ìndice para una cantidad de archivos JSON Tweets se generan solo una vez y seràn guardados en memoria secundaria. De esta forma, cada vez que en el frontend realice una peticion este se cargara desde memoria secundaria y retornara el indice, posteriormente y segun el querie retornara en el frontend el id de los tweets y su respectivo texto.
 
