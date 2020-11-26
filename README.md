@@ -109,3 +109,6 @@ def search(content):
 </pre>
 
 [Codigo](https://github.com/LuisUTEC/BD2_proyecto02_Biblioteca/blob/master/server.py)
+
+## Pruebas
+
