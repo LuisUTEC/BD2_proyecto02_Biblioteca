@@ -78,6 +78,8 @@ def tf_idf (self):
 	docs_length[term] = len(self[term])
 </pre>
 
+[Codigo](https://github.com/LuisUTEC/BD2_proyecto02_Biblioteca/blob/master/invertindex.py)
+
 ### Manejo de memoria Secundaria
 Se tienen datos de una cantidad bastante grande de Tweets dentros de archivos JSON; para mejorar la eficiencia el manejo de la memoria secundaria esta dividido en 3 files a parte de la data que se guarda,teniendo un file donde se guarda el indice invertido, las normas y los tf_idf.
 <pre>
