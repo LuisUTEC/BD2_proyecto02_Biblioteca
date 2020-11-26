@@ -11,7 +11,7 @@ El objetivo de este proyecto es poner en practica los conceptos de recuperacion 
 
 ## Frontend
 
-
+Para el frontend se trabajo una visualización web con backend controlado por python. Las funciones son llamadas con ajax. La visualización usa una plantilla de boostrap para tener una visualización más agradable. La pagina es sencilla hay un buscador y en el escribes el texto que quieres encontrar le das GO! y te realizara la busqueda del tweet con mayor score según el tf-idf. Esto se logra con una conexión por medio de javascrip y ajax que permite realizar un GET al servidor de python y obtener el resultado.
 
 ## Backend
 
@@ -21,6 +21,5 @@ Se emplearon los filtros y procesos de tokenization, filtros y stemming. Al adqu
 ### Construcción del Índice
 
 
-
 ### Consulta
-
+A partir del indice invertido guardado en memoria secundaria la consulta utiliza los valores para calcular los score de cada tweet. Esto se luego se divide por cada length, distancia o cantidad de palabras en el tweet el caul se guardo en la fase de construcción del indice debido a su uso practico en un futuro. Finalmente retornar los 5 tweets con mayor score.
