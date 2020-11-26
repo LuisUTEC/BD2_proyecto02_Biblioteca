@@ -23,13 +23,15 @@ def setFiles(files):
     n = 0
     for file in files:
         print(file)
-        with open("clean/"+file) as file_json:
+        with open("clean/"+file, errors='ignore') as file_json:
             file_clean = json.load(file_json)
         for tweet in file_clean:
             text = tweet['text']
             file_stemmed = []
             text = text.lower()
-            files_tokens = nltk.word_tokenize(text)
+            files_tokens = []
+            tokenizer = nltk.RegexpTokenizer(r"\w+")
+            files_tokens = tokenizer.tokenize(text)
             for token in files_tokens:
                 if token in stoplist:
                     files_tokens.remove(token)
