@@ -22,7 +22,7 @@ def static_content(content):
 def search(content):
     data = query(content)
     print(content)
-    return Response(data, status=200, mimetype='application/json')
+    return Response(json.dumps(data), mimetype='application/json')
 
 if __name__ == '__main__':
     app.secret_key = ".."

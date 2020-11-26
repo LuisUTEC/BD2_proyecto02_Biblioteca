@@ -36,9 +36,10 @@ def query(content):
     for t in words:
         with open('index.json') as file:
             data = json.load(file)
-        for doc in data[t]:
-            Scores.setdefault(doc, 0)
-            Scores[doc] += data[t][doc]['tf-idf']
+        if t in data:
+            for doc in data[t]:
+                Scores.setdefault(doc, 0)
+                Scores[doc] += data[t][doc]['tf-idf']
     with open('doc_length.json') as file:
         doc_length = json.load(file)
     for length in doc_length:
