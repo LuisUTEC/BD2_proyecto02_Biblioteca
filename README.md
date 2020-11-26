@@ -20,7 +20,9 @@ Para el frontend se trabajo una visualización web con backend controlado por py
 ## Backend
 
 ### Pre-procesado
-Se emplearon los filtros y procesos de tokenization, filtros y stemming. Al adquirir el texto de un tweet, se separan cada una de las palabras y signos de puntuación, estos tokens se guardan en una lista a la cual la pasaremos por un filtro para remover palabras irrelevantes y los signos de puntuación. Por último se recorta cada palabra a su raiz de acuerdo al idioma español.  
+Se emplearon los filtros y procesos de tokenization, filtros y stemming. Al adquirir el texto de un tweet, se separan cada una de las palabras y signos de puntuación, estos tokens se guardan en una lista a la cual la pasaremos por un filtro para remover palabras irrelevantes y los signos de puntuación. Por último se recorta cada palabra a su raiz de acuerdo al idioma español. 
+
+[Codigo](https://github.com/LuisUTEC/BD2_proyecto02_Biblioteca/blob/master/Files.py)
 
 ### Construcción del Índice
 
