@@ -112,6 +112,8 @@ def search(content):
 
 ## Pruebas
 
+#### Preprocesamiento y Creación de indices
+
 | N° de tweets | Tiempo(s) |
 | ----- | ---- |
 | 9131 | 4,496123688 |
@@ -120,3 +122,14 @@ def search(content):
 | 181347 | 90,30275361 |
 
 ![Alt text](/../master/Diagrama1.png?raw=true "Optional Title")
+
+#### Consultas
+
+| N° de tweets | Tiempo(s) |
+| ----- | ---- |
+| 9131 | 0,2504851818 |
+| 34696 | 0,9956831931 |
+| 46298 | 1,345535028 |
+| 181347 | 5,467158874 |
+
+![Alt text](/../master/Diagrama2.png?raw=true "Optional Title")
