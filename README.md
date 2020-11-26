@@ -1,6 +1,6 @@
 # BD2_proyecto02_Biblioteca
 
-Integrantes:
+### Integrantes:
 - Ascuña Coa, Vìctor
 - Cordero Pinela, Luis
 - Mejia Ramon, Marlon
@@ -12,6 +12,10 @@ El objetivo de este proyecto es poner en practica los conceptos de recuperacion 
 ## Frontend
 
 Para el frontend se trabajo una visualización web con backend controlado por python. Las funciones son llamadas con ajax. La visualización usa una plantilla de boostrap para tener una visualización más agradable. La pagina es sencilla hay un buscador y en el escribes el texto que quieres encontrar le das GO! y te realizara la busqueda del tweet con mayor score según el tf-idf. Esto se logra con una conexión por medio de javascrip y ajax que permite realizar un GET al servidor de python y obtener el resultado.
+
+[HTML](https://github.com/LuisUTEC/BD2_proyecto02_Biblioteca/blob/master/templates/index.html)
+
+[JS-AJAX](https://github.com/LuisUTEC/BD2_proyecto02_Biblioteca/blob/master/static/js/function.js)
 
 ## Backend
 
@@ -57,3 +61,50 @@ def tf_idf (self):
 
 ### Consulta
 A partir del indice invertido guardado en memoria secundaria la consulta utiliza los valores para calcular los score de cada tweet. Esto se luego se divide por cada length, distancia o cantidad de palabras en el tweet el caul se guardo en la fase de construcción del indice debido a su uso practico en un futuro. Finalmente retornar los 5 tweets con mayor score.
+
+
+<pre>
+def query(content):
+    Scores = {}
+    Length = {}
+    words = parsing(content)
+    for t in words:
+        with open('index.json') as file:
+            data = json.load(file)
+        if t in data:
+            for doc in data[t]:
+                Scores.setdefault(doc, 0)
+                Scores[doc] += data[t][doc]['tf-idf']
+    with open('doc_length.json') as file:
+        doc_length = json.load(file)
+    for length in doc_length:
+        Length[length] = doc_length[length]
+    for d in Scores:
+        Scores[d] = Scores[d]/Length[d]
+    return top(5, Scores)
+</pre>
+
+[Codigo](https://github.com/LuisUTEC/BD2_proyecto02_Biblioteca/blob/master/query.py)
+
+### Servidor
+Para el manejo del servidor se utilizo un servidor en python con host en **127.0.0.1** para routear la pagina web donde se haran las consultas. Dicho servidor sirve principalmente de enlace entre la función de consulto, la data de los tweets y el usuario por medio del frontend.
+<pre>
+if __name__ == '__main__':
+    app.secret_key = ".."
+    app.run(port=8080, threaded=True, host=('127.0.0.1'))
+</pre> 
+<pre>
+@app.route('/search/<content>', methods = ['GET'])
+def search(content):
+    data = query(content)
+    with open('text.json') as file:
+        text = json.load(file)
+    response = {}
+    i = 0
+    for d in data:
+        response[i] = text[d]
+        i += 1
+    return Response(json.dumps(response), mimetype='application/json')
+</pre>
+
+[Codigo](https://github.com/LuisUTEC/BD2_proyecto02_Biblioteca/blob/master/server.py)
