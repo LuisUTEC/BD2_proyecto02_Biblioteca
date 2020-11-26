@@ -31,32 +31,31 @@ code
 Se tienen datos de una cantidad bastante grande de Tweets dentros de archivos JSON; para mejorar la eficiencia el manejo de la memoria secundaria esta dividido en 3 files a parte de la data que se guarda,teniendo un file donde se guarda el indice invertido, las normas y los tf_idf.
 <pre>
 def tf_idf (self):
-	data = {}
-	docs_length = {}
-	for term in self:
-	    for word in self[term]:
-		if word in data.keys():
-		    if term in data[word].keys():
-		        data[word][term].setdefault('f', 0)
-			data[word][term]['f'] += 1
-		    else:
-			data[word][term] = {}
-			data[word][term].setdefault('f', 0)
-			data[word][term]['f'] += 1
+    data = {}
+    docs_length = {}
+    for term in self:
+        for word in self[term]:
+    	    if word in data.keys():
+	        if term in data[word].keys():
+		    data[word][term].setdefault('f', 0)
+		    data[word][term]['f'] += 1
 		else:
-		    data[word] = {}
-	    docs_length[term] = len(self[term])
+		    data[word][term] = {}
+		    data[word][term].setdefault('f', 0)
+		    data[word][term]['f'] += 1
+	    else:
+		data[word] = {}
+	docs_length[term] = len(self[term])
 
-	for word in data:
-	    size = len(data[word])
-	    for doc in data[word]:
-		_tf_idf = round(tf(data[word][doc]['f'])*idf(size, len(self)), 2)
-		data[word][doc]['tf-idf'] = _tf_idf
-	with open('index.json', 'w') as file:
-	    json.dump(data, file)
-	with open('doc_length.json', 'w') as file:
-	    json.dump(docs_length, file)
-
+    for word in data:
+	size = len(data[word])
+	for doc in data[word]:
+	    _tf_idf = round(tf(data[word][doc]['f'])*idf(size, len(self)), 2)
+	    data[word][doc]['tf-idf'] = _tf_idf
+    with open('index.json', 'w') as file:
+        json.dump(data, file)
+    with open('doc_length.json', 'w') as file:
+	json.dump(docs_length, file)
 </pre>
 
 ### Consulta
