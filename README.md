@@ -112,3 +112,11 @@ def search(content):
 
 ## Pruebas
 
+| N° de tweets | Tiempo(s) |
+| ----- | ---- |
+| 9131 | 4,496123688 |
+| 34696 | 17,27564565 |
+| 46298 | 23,25669138 |
+| 181347 | 90,30275361 |
+
+![Alt text](/../master/Diagrama1.png?raw=true "Optional Title")
