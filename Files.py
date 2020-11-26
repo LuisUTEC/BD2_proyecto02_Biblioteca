@@ -20,6 +20,7 @@ files = [i for i in listdir("clean/") if isfile(join("clean/", i))]
 
 def setFiles(files):
     tweets = {}
+    tweets_text = {}
     n = 0
     for file in files:
         print(file)
@@ -27,6 +28,7 @@ def setFiles(files):
             file_clean = json.load(file_json)
         for tweet in file_clean:
             text = tweet['text']
+            tweets_text[tweet['id']] = text
             file_stemmed = []
             text = text.lower()
             files_tokens = []
@@ -41,8 +43,11 @@ def setFiles(files):
         n+=1
         if n == 2:
             break
-    for tweet in tweets:
-        print(tweet)
-        print(tweets[tweet])
+    with open('text.json', 'w') as file:
+        json.dump(tweets_text, file)
+
+        #for tweet in tweets:
+    #    print(tweet)
+    #    print(tweets[tweet])
     return tweets
 

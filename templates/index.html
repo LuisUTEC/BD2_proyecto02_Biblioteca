@@ -23,7 +23,6 @@
 
   <!-- AJAX -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="/static/js/function.js"></script>
 
 </head>
 
@@ -51,7 +50,7 @@
                 <input type="text" class="form-control form-control-lg" placeholder="Search ..." id="content">
               </div>
               <div class="col-12 col-md-3">
-                <input type="button" class="btn btn-block btn-lg btn-primary" value="GO!" onclick="searchData()"/>
+                <input type="button" class="btn btn-block btn-lg btn-primary" value="GO!" onclick="clear();searchData()"/>
               </div>
             </div>
           </form>
@@ -120,7 +119,35 @@
   <!-- Bootstrap core JavaScript -->
   <script src="/static/vendor/jquery/jquery.min.js"></script>
   <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script>
+    function clear(){
+      document.getElementById('result').innerHTML="";
+    }
+    function searchData(){
+      var cont = $('#content').val();
+      $('#content').val('');
+      $.ajax({
+        url:'/search/'+cont,
+        type:'GET',
+        contentType: 'application/json',
+        dataType:'json',
+        success: function(response){
+          //alert(JSON.stringify(response));
+          var i = 0;
+          $.each(response, function(){
+            f = '<div class="alert alert-primary">';
+            f = f + response[i];
+            f = f + '</div>';
+            i = i+1;
+            $('#result').append(f);
+          });
+        },
+        error: function(response){
+            alert(JSON.stringify(response));
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

@@ -21,8 +21,14 @@ def static_content(content):
 @app.route('/search/<content>', methods = ['GET'])
 def search(content):
     data = query(content)
-    print(content)
-    return Response(json.dumps(data), mimetype='application/json')
+    with open('text.json') as file:
+        text = json.load(file)
+    response = {}
+    i = 0
+    for d in data:
+        response[i] = text[d]
+        i += 1
+    return Response(json.dumps(response), mimetype='application/json')
 
 if __name__ == '__main__':
     app.secret_key = ".."

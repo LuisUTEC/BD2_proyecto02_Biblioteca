@@ -10,14 +10,14 @@ from Files import stoplist, stemmer
 def top(K, Scores):
     Result = {}
     Scores_items = Scores.items()
-    Scores_sorted = sorted(Scores_items, key=lambda coche: coche[1])
+    Scores_sorted = sorted(Scores_items, key=lambda coche: coche[1], reverse=True)
     i = 0
     for doc in Scores_sorted:
         if i == K:
             break
         Result[doc[0]] = doc[1]
         i += 1
-    return Scores
+    return Result
 
 def parsing(content):
     files_tokens = nltk.word_tokenize(content)

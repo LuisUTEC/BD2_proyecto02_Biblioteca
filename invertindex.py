@@ -12,19 +12,22 @@ def tf_idf (self):
 	docs_length = {}
 	for term in self:
 		for word in self[term]:
-			data[word] = {}
-			data[word][term] = {}
-			if 'f' in data[word][term].keys():
-				data[word][term]['f'] += 1
+			if word in data.keys():
+				if term in data[word].keys():
+					data[word][term].setdefault('f', 0)
+					data[word][term]['f'] += 1
+				else:
+					data[word][term] = {}
+					data[word][term].setdefault('f', 0)
+					data[word][term]['f'] += 1
 			else:
-				data[word][term]['f'] = 1
+				data[word] = {}
 		docs_length[term] = len(self[term])
 
 	for word in data:
-		docs = data[word]
-		size = len(docs)
-		for doc in docs:
-			_tf_idf = round(tf(docs[doc]['f'])*idf(size, len(self)), 2)
+		size = len(data[word])
+		for doc in data[word]:
+			_tf_idf = round(tf(data[word][doc]['f'])*idf(size, len(self)), 2)
 			data[word][doc]['tf-idf'] = _tf_idf
 	with open('index.json', 'w') as file:
 		json.dump(data, file)
