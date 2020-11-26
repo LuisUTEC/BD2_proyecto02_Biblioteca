@@ -36,11 +36,11 @@ def setFiles(files):
             for token in files_tokens:
                 file_stemmed.append(stemmer.stem(token))
             tweets[tweet['id']] = file_stemmed
-        #n+=1
-        #if n == 2:
-        #    break
-    #for tweet in tweets:
-    #    print(tweet)
-    #    print(tweets[tweet])
+        n+=1
+        if n == 2:
+            break
+    for tweet in tweets:
+        print(tweet)
+        print(tweets[tweet])
     return tweets
 
