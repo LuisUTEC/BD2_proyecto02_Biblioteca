@@ -20,7 +20,6 @@ def static_content(content):
 
 @app.route('/search/<content>', methods = ['GET'])
 def search(content):
-    data = []
     data = query(content)
     return Response(json.dumps(data), mimetype='application/json')
 
