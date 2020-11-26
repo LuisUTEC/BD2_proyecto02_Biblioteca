@@ -3,7 +3,7 @@ from flask import Flask,render_template, request, session, Response, redirect
 #from model import entities
 import json
 import time
-from Database import query
+from query import query
 
 #db = connector.Manager()
 #engine = db.createEngine()
@@ -21,7 +21,8 @@ def static_content(content):
 @app.route('/search/<content>', methods = ['GET'])
 def search(content):
     data = query(content)
-    return Response(json.dumps(data), mimetype='application/json')
+    print(content)
+    return Response(data, status=200, mimetype='application/json')
 
 if __name__ == '__main__':
     app.secret_key = ".."

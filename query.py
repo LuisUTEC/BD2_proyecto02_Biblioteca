@@ -4,7 +4,7 @@ from nltk import collections
 from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 
-from Database.Files import stoplist, stemmer
+from Files import stoplist, stemmer
 
 
 def top(K, Scores):
