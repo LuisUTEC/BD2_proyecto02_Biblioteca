@@ -58,12 +58,7 @@ def setFiles(files):
 [Codigo](https://github.com/LuisUTEC/BD2_proyecto02_Biblioteca/blob/master/Files.py)
 
 ### Construcción del Índice
-La construcciòn del ìndice para una cantidad de archivos JSON Tweets se generan solo una vez y seràn guardados en memoria secundaria. De esta forma, cada vez que en el frontend realice una peticion este se cargara desde memoria secundaria y retornara el indice, posteriormente y segun el querie retornara en el frontend el id de los tweets y su respectivo texto.
-
-
-
-### Manejo de memoria Secundaria
-Se tienen datos de una cantidad bastante grande de Tweets dentros de archivos JSON; para mejorar la eficiencia el manejo de la memoria secundaria esta dividido en 3 files a parte de la data que se guarda,teniendo un file donde se guarda el indice invertido, las normas y los tf_idf.
+La construcción de los indices se empieza a partir de la construcción de un arreglo que almacene todos los tweets y sus palabras, labor que hace el preprocesamiento. Posteriormente se procede a sacar la respectiva frecuencia de cada palabra por documento, se crea un nuevo JSON el cual almacenara el tf-idf, junto con su frecuencia. Esto tambien nos permite calcular las longitudes de los tweets. Esto luego pasara a ser guardado en memoria secundaria. De esta forma, cada vez que en el frontend realice una peticion este se cargara desde memoria secundaria y retornara el indice, posteriormente y segun el querie retornara en el frontend el id de los tweets y su respectivo texto.
 <pre>
 def tf_idf (self):
     data = {}
@@ -81,12 +76,11 @@ def tf_idf (self):
 	    else:
 		data[word] = {}
 	docs_length[term] = len(self[term])
+</pre>
 
-    for word in data:
-	size = len(data[word])
-	for doc in data[word]:
-	    _tf_idf = round(tf(data[word][doc]['f'])*idf(size, len(self)), 2)
-	    data[word][doc]['tf-idf'] = _tf_idf
+### Manejo de memoria Secundaria
+Se tienen datos de una cantidad bastante grande de Tweets dentros de archivos JSON; para mejorar la eficiencia el manejo de la memoria secundaria esta dividido en 3 files a parte de la data que se guarda,teniendo un file donde se guarda el indice invertido, las normas y los tf_idf.
+<pre>
     with open('index.json', 'w') as file:
         json.dump(data, file)
     with open('doc_length.json', 'w') as file:
