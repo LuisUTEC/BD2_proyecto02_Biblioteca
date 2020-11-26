@@ -22,6 +22,39 @@ Para el frontend se trabajo una visualización web con backend controlado por py
 ### Pre-procesado
 Se emplearon los filtros y procesos de tokenization, filtros y stemming. Al adquirir el texto de un tweet, se separan cada una de las palabras y signos de puntuación, estos tokens se guardan en una lista a la cual la pasaremos por un filtro para remover palabras irrelevantes y los signos de puntuación. Por último se recorta cada palabra a su raiz de acuerdo al idioma español.  
 
+<pre>
+def setFiles(files):
+    tweets = {}
+    tweets_text = {}
+    n = 0
+    for file in files:
+        print(file)
+        with open("clean/"+file, errors='ignore') as file_json:
+            file_clean = json.load(file_json)
+        for tweet in file_clean:
+            text = tweet['text']
+            tweets_text[tweet['id']] = text
+            file_stemmed = []
+            text = text.lower()
+            files_tokens = []
+            tokenizer = nltk.RegexpTokenizer(r"\w+")
+            files_tokens = tokenizer.tokenize(text)
+            for token in files_tokens:
+                if token in stoplist:
+                    files_tokens.remove(token)
+            for token in files_tokens:
+                file_stemmed.append(stemmer.stem(token))
+            tweets[tweet['id']] = file_stemmed
+        n+=1
+        if n == 2:
+            break
+    with open('text.json', 'w') as file:
+        json.dump(tweets_text, file)
+
+    return tweets
+</pre>
+
+
 ### Construcción del Índice
 La construcciòn del ìndice para una cantidad de archivos JSON Tweets se generan solo una vez y seràn guardados en memoria secundaria. De esta forma, cada vez que en el frontend realice una peticion este se cargara desde memoria secundaria y retornara el indice, posteriormente y segun el querie retornara en el frontend el id de los tweets y su respectivo texto.
 
